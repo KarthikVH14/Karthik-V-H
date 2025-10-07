@@ -1,0 +1,111 @@
+ /* === CONTACT SECTION STYLES === */
+.contact-container {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-card {
+  background-color: var(--container-color);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.contact-card-title {
+  font-size: 1.1rem;
+}
+
+.contact-card-data {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.contact-button {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-content {
+  position: relative;
+  height: 4rem;
+  border-bottom: 2px solid var(--text-color);
+}
+
+.contact-content textarea {
+  height: 11rem;
+}
+
+.contact-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1rem 1rem 0;
+  background: none;
+  color: var(--text-color);
+  border: none;
+  outline: none;
+  z-index: 1;
+}
+
+.contact-label {
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
+  width: 100%;
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+/* Input focus styles */
+.contact-input:focus + .contact-label {
+  top: -0.75rem;
+  left: 0;
+  font-size: 0.75rem;
+  color: var(--primary-color);
+}
+
+/* Input has value styles */
+.contact-input:not(:placeholder-shown).contact-input:not(:focus) + .contact-label {
+  top: -0.75rem;
+  font-size: 0.75rem;
+}
+
+.contact-send-button {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-medium);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-send-button:hover {
+  background-color: var(--primary-color-alt);
+}
+
+/* === Responsive Styles === */
+@media screen and (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,16 @@
+ .hero-animation-container {
+  /* This creates the necessary space for the scroll animation to happen */
+  height: 300vh; 
+  position: relative;
+}
+
+#parallax-svg {
+  /* This pins the animation to the top of the viewport while scrolling */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: block;
+}
+

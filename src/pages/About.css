@@ -1,0 +1,64 @@
+ /* === ABOUT SECTION STYLES === */
+.section {
+  padding: 6rem 1rem;
+}
+
+.section-title {
+  font-size: var(--h1-font-size);
+  text-align: center;
+}
+
+.section-subtitle {
+  display: block;
+  font-size: var(--normal-font-size);
+  margin-bottom: 4rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-container {
+  /* Changed to a single column layout */
+  grid-template-columns: 1fr;
+  max-width: 800px; /* Constrain width for better readability */
+  margin: 0 auto;
+}
+
+/* The .about-img styles have been removed */
+
+.about-data {
+  text-align: center; /* Center all text */
+}
+
+.about-description {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.about-info {
+  display: flex;
+  justify-content: space-around; /* Space out the info boxes */
+  gap: 2rem;
+}
+
+.about-info-title {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--accent-color);
+  display: block;
+}
+
+.about-info-name {
+  font-size: 0.875rem;
+}
+

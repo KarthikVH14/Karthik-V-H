@@ -1,0 +1,32 @@
+/* === EDUCATION SECTION STYLES === */
+.education-container {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.education-item {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border-left: 5px solid var(--primary-color);
+}
+
+.education-degree {
+  font-size: 1.2rem;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.education-institution {
+  font-weight: var(--font-medium);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.education-period,
+.education-grade {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}

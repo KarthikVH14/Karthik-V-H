@@ -1,0 +1,65 @@
+ /* === CERTIFICATIONS SECTION STYLES === */
+.certifications-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.certification-card figure {
+  position: relative;
+  overflow: hidden; /* Crucial for the zoom effect */
+  margin: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.4s ease;
+}
+
+.certification-card:hover figure {
+  border-color: var(--accent-color);
+}
+
+.certification-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  
+  /* Default state: slightly zoomed in and blurred */
+  transform: scale(1.15);
+  filter: blur(6px) saturate(0.8);
+  
+  /* Smooth transitions for the hover effect */
+  transition: transform 0.5s ease-out, filter 0.5s ease-out;
+}
+
+.certification-title {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--title-color);
+  padding: 0.5rem 1.25rem;
+  background-color: rgba(10, 25, 47, 0.8); /* Semi-transparent version of the bg color */
+  backdrop-filter: blur(4px);
+  border-radius: 0.5rem;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+  font-weight: var(--font-medium);
+  z-index: 10;
+  text-align: center;
+  width: calc(100% - 2rem);
+}
+
+/* Hover state: Zoom out and unblur the image */
+.certification-card:hover .certification-image {
+  transform: scale(1);
+  filter: blur(0px) saturate(1);
+}
+
+/* Optional: Hide the text title on hover to fully reveal the image */
+.certification-card:hover .certification-title {
+  opacity: 0;
+}
+

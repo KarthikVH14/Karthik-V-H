@@ -1,0 +1,150 @@
+ /* === NAVBAR STYLES === */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  z-index: 1000;
+  transition: background-color 0.4s;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar.scrolled {
+  background-color: rgba(19, 30, 44, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--container-color);
+}
+
+.nav-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 4.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.nav-logo {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-logo:hover {
+  color: var(--primary-color);
+}
+
+.nav-list {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-color);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active-link {
+  color: var(--primary-color);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  bottom: -0.5rem;
+  left: 0;
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active-link::after {
+  width: 100%;
+}
+
+.nav-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--title-color);
+}
+
+/* === Responsive Styles === */
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    background-color: var(--bg-color);
+    top: -100%;
+    left: 0;
+    width: 100%;
+    padding: 4rem 0;
+    transition: top 0.4s;
+    border-bottom: 2px solid var(--container-color);
+  }
+
+  .nav-menu.active {
+    top: 0;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1.5rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+  
+  /* Basic burger icon */
+  .nav-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--title-color);
+    position: relative;
+    transition: background-color 0s 0.2s;
+  }
+
+  .nav-icon::before,
+  .nav-icon::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--title-color);
+    transition: transform 0.2s 0.2s ease-out;
+  }
+
+  .nav-icon::before {
+    top: -8px;
+  }
+
+  .nav-icon::after {
+    top: 8px;
+  }
+  
+  /* Animated close icon */
+  .icon-close {
+    background-color: transparent;
+  }
+
+  .icon-close::before {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .icon-close::after {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

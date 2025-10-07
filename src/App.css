@@ -1,0 +1,42 @@
+ .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: var(--container-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-header h1 {
+  font-size: var(--h1-font-size);
+  color: var(--primary-color);
+}
+
+.App-header p {
+  margin-top: 8px;
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-medium);
+}
+/* Existing styles for the App component */
+.App {
+  text-align: center;
+}
+
+/* NEW STYLES: This is the fix.
+  This ensures the main content area has a solid background and a higher
+  stacking order, so it cleanly scrolls OVER the hero animation.
+*/
+.main-content {
+  position: relative; /* Creates a new stacking context */
+  z-index: 5;          /* Ensures it's above the hero animation (which is z-index: 1) */
+  background-color: var(--bg-color); /* The crucial solid background color */
+}
+
+/* Redundant header styles that can be removed if not used */
+/* .App-header { ... } */

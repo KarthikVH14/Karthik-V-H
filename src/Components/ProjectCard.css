@@ -1,0 +1,100 @@
+ /* === PROJECT CARD STYLES === */
+.project-card {
+  background-color: var(--container-color);
+  border-radius: 0.5rem; /* Slightly sharper corners */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--primary-color);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(100, 255, 218, 0.1);
+  border-color: var(--accent-color);
+}
+
+/* The new header that displays the project name */
+.project-card__header {
+  background-color: #112240; /* A darker, complementary navy */
+  padding: 3rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card__main-title {
+  font-size: 3rem;
+  font-weight: var(--font-bold);
+  color: var(--title-color);
+  text-align: center;
+}
+
+.project-card__content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--title-color);
+}
+
+.project-card__description {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.project-card__tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-tag {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-medium);
+}
+
+.project-card__links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.project-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: var(--font-medium);
+  transition: background-color 0.3s, color 0.3s;
+  border: 2px solid transparent;
+}
+
+.project-link.live {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.project-link.live:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+
+
+.project-link.github:hover {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+

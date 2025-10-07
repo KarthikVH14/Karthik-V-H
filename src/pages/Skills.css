@@ -1,0 +1,95 @@
+ /* === SKILLS SECTION STYLES === */
+.skills-container {
+  position: relative;
+  width: clamp(320px, 90vw, 650px);
+  aspect-ratio: 1 / 1;
+  margin: 5rem auto;
+  padding: 0;
+}
+
+.skill-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 184px; 
+  margin: -92px 0 0 -80px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  cursor: default;
+  transition: transform 0.5s ease-out;
+}
+
+.skill-item:hover {
+  transform: scale(1.15) !important;
+  z-index: 10;
+}
+
+/* New positions for 8 skills.
+  The angle is now a clean 45deg (360 / 8).
+*/
+.skill-item:nth-child(1) { transform: rotate(0deg) translateY(-250px) rotate(0deg); }
+.skill-item:nth-child(2) { transform: rotate(45deg) translateY(-250px) rotate(-45deg); }
+.skill-item:nth-child(3) { transform: rotate(90deg) translateY(-250px) rotate(-90deg); }
+.skill-item:nth-child(4) { transform: rotate(135deg) translateY(-250px) rotate(-135deg); }
+.skill-item:nth-child(5) { transform: rotate(180deg) translateY(-250px) rotate(-180deg); }
+.skill-item:nth-child(6) { transform: rotate(225deg) translateY(-250px) rotate(-225deg); }
+.skill-item:nth-child(7) { transform: rotate(270deg) translateY(-250px) rotate(-270deg); }
+.skill-item:nth-child(8) { transform: rotate(315deg) translateY(-250px) rotate(-315deg); }
+
+
+.skill-hexagon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  fill: rgba(100, 255, 218, 0.05);
+  stroke: var(--primary-color);
+  stroke-width: 2px;
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.skill-item:hover .skill-hexagon {
+  stroke: var(--accent-color);
+  fill: rgba(100, 255, 218, 0.1);
+}
+
+.skill-name {
+  position: relative;
+  z-index: 2;
+  color: var(--text-color);
+  font-weight: var(--font-medium);
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+/* Responsive adjustments for the new layout */
+@media screen and (max-width: 768px) {
+  .skills-container {
+      transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills-container {
+      transform: scale(0.65);
+      margin-top: -3rem;
+      margin-bottom: -3rem;
+  }
+   /* Adjust radius for smaller screens */
+  .skill-item:nth-child(1) { transform: rotate(0deg) translateY(-220px) rotate(0deg); }
+  .skill-item:nth-child(2) { transform: rotate(45deg) translateY(-220px) rotate(-45deg); }
+  .skill-item:nth-child(3) { transform: rotate(90deg) translateY(-220px) rotate(-90deg); }
+  .skill-item:nth-child(4) { transform: rotate(135deg) translateY(-220px) rotate(-135deg); }
+  .skill-item:nth-child(5) { transform: rotate(180deg) translateY(-220px) rotate(-180deg); }
+  .skill-item:nth-child(6) { transform: rotate(225deg) translateY(-220px) rotate(-225deg); }
+  .skill-item:nth-child(7) { transform: rotate(270deg) translateY(-220px) rotate(-270deg); }
+  .skill-item:nth-child(8) { transform: rotate(315deg) translateY(-220px) rotate(-315deg); }
+}
+
