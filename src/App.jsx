@@ -2,8 +2,8 @@
 import './App.css';
 
 // Import reusable components like the Navbar and Footer
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
 
 // Import all the page sections
 import Home from './pages/Home';
