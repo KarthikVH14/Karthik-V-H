@@ -12,20 +12,18 @@
 
 .home-container {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Text takes 2/3, image takes 1/3 */
+  grid-template-columns: 2fr 1fr;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem; /* Increased gap slightly */
   width: 100%;
   max-width: 1200px;
 }
 
-/* Container for the text block */
 .wrapper {
   border-left: 4px solid var(--accent-color);
   overflow: hidden; 
 }
 
-/* Large headline styles (Your Name) */
 .bigline {
   font-size: clamp(3rem, 9vw, 6rem);
   color: var(--title-color);
@@ -36,34 +34,57 @@
   font-weight: var(--font-bold);
 }
 
-/* Introductory paragraph styles (Your Role) */
 .introline {
   font-size: clamp(1.5rem, 3vw, 2rem);
   margin: 10px 0 0 22px;
   font-weight: var(--font-medium);
   color: var(--primary-color);
+  opacity: 1;
 }
 
-/* --- Profile Picture Styles --- */
+/* --- Profile Picture Styles (UPDATED) --- */
+
+/* The container is now a rounded rectangle */
 .home-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 280px;
+  height: 350px;
+  border-radius: 0.75rem; /* Changed from 50% to create rounded corners */
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.2);
+  cursor: pointer;
+  transition: box-shadow 0.4s ease-out;
+  position: relative;
+  overflow: hidden; /* Ensures the image stays within the rounded corners */
 }
 
+/* The image fills the new rectangular container */
 .home-profile-pic {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 5px solid var(--accent-color);
-  box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+  /* The clip-path is no longer needed */
+  transition: filter 0.4s ease-out, transform 0.4s ease-out;
 }
+
+
+/* --- HOVER EFFECTS --- */
+
+.home-image-container:hover {
+  box-shadow: 0 0 15px var(--accent-color), 
+              0 0 30px var(--accent-color), 
+              0 0 45px rgba(100, 255, 218, 0.5);
+}
+
+.home-image-container:hover .home-profile-pic {
+  filter: blur(5px);
+  transform: scale(1.1);
+}
+
 
 /* --- Responsive Design for Smaller Screens --- */
 @media screen and (max-width: 768px) {
   .home-container {
-    grid-template-columns: 1fr; /* Stack on top of each other */
+    grid-template-columns: 1fr;
     text-align: center;
     gap: 4rem;
   }
@@ -77,11 +98,10 @@
     margin-left: 0;
   }
   .home-image-container {
-    order: -1; /* Move the image to the top on mobile */
-  }
-  .home-profile-pic {
+    order: -1;
     width: 200px;
-    height: 200px;
+    height: 250px; /* Adjusted height for mobile */
+    margin: 0 auto;
   }
 }
 
