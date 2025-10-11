@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  gap: 3rem; /* Increased gap slightly */
+  gap: 3rem;
   width: 100%;
   max-width: 1200px;
 }
@@ -42,32 +42,31 @@
   opacity: 1;
 }
 
-/* --- Profile Picture Styles (UPDATED) --- */
+/* --- Profile Picture Styles --- */
 
-/* The container is now a rounded rectangle */
 .home-image-container {
   width: 280px;
   height: 350px;
-  border-radius: 0.75rem; /* Changed from 50% to create rounded corners */
+  border-radius: 0.75rem;
   border: 4px solid var(--accent-color);
   box-shadow: 0 0 25px rgba(100, 255, 218, 0.2);
   cursor: pointer;
-  transition: box-shadow 0.4s ease-out;
   position: relative;
-  overflow: hidden; /* Ensures the image stays within the rounded corners */
+  overflow: hidden;
+  transition: box-shadow 0.4s ease-out;
 }
 
-/* The image fills the new rectangular container */
 .home-profile-pic {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* The clip-path is no longer needed */
   transition: filter 0.4s ease-out, transform 0.4s ease-out;
+  /* THE FIX: This promotes the image to its own rendering layer, fixing the blur issue. */
+  transform: translateZ(0);
 }
 
 
-/* --- HOVER EFFECTS --- */
+/* --- HOVER EFFECTS (NEW) --- */
 
 .home-image-container:hover {
   box-shadow: 0 0 15px var(--accent-color), 
@@ -100,7 +99,7 @@
   .home-image-container {
     order: -1;
     width: 200px;
-    height: 250px; /* Adjusted height for mobile */
+    height: 250px;
     margin: 0 auto;
   }
 }

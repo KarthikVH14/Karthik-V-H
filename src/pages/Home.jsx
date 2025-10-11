@@ -1,67 +1,65 @@
  import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
+import ProfileCarousel from '../Components/ProfileCarousel'; // Import the new carousel
 import './Home.css';
-// THE FIX: The folder name is corrected from "image" to "images".
-import profileImage from '../assets/images/Profile.png'; 
+
+const roles = ["Java Developer", "Backend Developer", "Full Stack Developer"];
 
 const Home = () => {
   const component = useRef(null);
   const introLineRef = useRef(null);
-  const [roleIndex, setRoleIndex] = useState(0);
-  const roles = ["Java Developer", "Backend Developer", "Full Stack Developer"];
+  const [currentFace, setCurrentFace] = useState(0);
 
-  // Animation 1: Initial Page Load Animation
+  // --- Animation 1: Initial Page Load Animation ---
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       const bigLine = component.current.querySelector('.bigline');
-      const introLine = introLineRef.current;
-      const profilePic = component.current.querySelector('.home-profile-pic');
-
-      gsap.set([introLine, bigLine], { x: '-101%' });
-      gsap.set(profilePic, { opacity: 0, scale: 0.8 });
-
-      const mainTimeline = gsap.timeline();
-      mainTimeline
-        .to(bigLine, { duration: 1.2, x: '0%', ease: 'power3.out', delay: 0.5 })
-        .to(introLine, { duration: 1.2, x: '0%', ease: 'power3.out' }, "<0.3")
-        .to(profilePic, { duration: 1, opacity: 1, scale: 1, ease: 'power3.out' }, "-=0.8");
+      // Slide in the name only once
+      gsap.from(bigLine, { duration: 1.2, x: '-101%', ease: 'power3.out', delay: 0.5 });
     }, component);
-
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
 
-  // Animation 2: Rotating Text Loop
+  // --- Animation 2: Synchronized Carousel and Role Text ---
   useEffect(() => {
     const introLine = introLineRef.current;
-    
-    const interval = setInterval(() => {
-      gsap.to(introLine, { 
-        opacity: 0, 
-        duration: 0.4, 
+
+    const rotationInterval = setInterval(() => {
+      // Fade out the current text
+      gsap.to(introLine, {
+        opacity: 0,
+        duration: 0.5,
         ease: 'power1.in',
         onComplete: () => {
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-          gsap.to(introLine, { 
-            opacity: 1, 
-            duration: 0.4, 
-            ease: 'power1.out'
-          });
+          // After fading out, update the state to trigger the rotation and text change
+          setCurrentFace((prev) => (prev + 1) % 3);
         }
       });
-    }, 2500);
-    
-    return () => clearInterval(interval);
-  }, [roles.length]);
+    }, 3000); // Pause for 3 seconds on each face
+
+    return () => clearInterval(rotationInterval);
+  }, []);
+
+  // Effect to fade the new text in after it has been updated
+  useEffect(() => {
+    gsap.to(introLineRef.current, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power1.out'
+    });
+  }, [currentFace]);
+
+  const rotationY = currentFace * -120;
 
   return (
     <section className="home-section" id="home" ref={component}>
       <div className="home-container">
         <div className="wrapper">
           <h1 className="bigline">Karthik VH</h1>
-          <p className="introline" ref={introLineRef}>{roles[roleIndex]}</p>
+          <p className="introline" ref={introLineRef}>{roles[currentFace]}</p>
         </div>
         <div className="home-image-container">
-          <img src={profileImage} alt="Karthik VH" className="home-profile-pic" />
+          <ProfileCarousel rotation={rotationY} />
         </div>
       </div>
     </section>

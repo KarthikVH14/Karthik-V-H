@@ -1,0 +1,39 @@
+/* --- 3D Profile Carousel Styles --- */
+
+.carousel-scene {
+  width: 250px;  /* Adjust width for a narrower rectangle */
+  height: 350px; /* Adjust height for a longer rectangle */
+  perspective: 1500px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel__panel {
+  position: absolute;
+  width: 250px;  /* Match the scene width */
+  height: 350px; /* Match the scene height */
+  backface-visibility: hidden;
+  border-radius: 0.75rem; /* Changed from 50% to create rounded corners */
+  overflow: hidden;
+  
+  /* The Neon Glow Effect */
+  box-shadow: 0 0 10px var(--accent-color),
+              0 0 20px var(--accent-color),
+              0 0 30px rgba(100, 255, 218, 0.7);
+}
+
+.carousel__panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
