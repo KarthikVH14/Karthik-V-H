@@ -9,7 +9,7 @@ const projectData = [
     description: 'A robust backend system for a real-time communication platform, featuring secure authentication, WebSocket-based messaging, and a scalable microservices architecture.',
     techStack: ['Java', 'Spring Boot', 'MySQL', 'JWT', 'Rest API' ],
     liveUrl: '#',
-    githubUrl: 'https://github.com/karthik-vh/clarityhub',
+    githubUrl: 'https://github.com/KarthikVH14/clarityhub-backend',
   },
   {
     shortTitle: 'Library App',
