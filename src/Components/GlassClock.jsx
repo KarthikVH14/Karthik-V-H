@@ -1,80 +1,90 @@
- import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import './GlassClock.css';
+ import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import "./GlassClock.css";
+
+// --- SVG Icon Components ---
+const SunIcon = () => (
+  <svg className="celestial-icon sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5" />
+    <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+  </svg>
+);
+
+const FullMoonIcon = () => (
+  <svg className="celestial-icon moon" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="48" fill="url(#moon-gradient)" />
+  </svg>
+);
+
+// The Bird component has been completely removed.
 
 const GlassClock = ({ onLoaded }) => {
-  const hourHandRef = useRef(null);
-  const minuteHandRef = useRef(null);
-  const secondHandRef = useRef(null);
-  const numbersRef = useRef(null);
+  const [timeString, setTimeString] = useState("");
+  const [greeting, setGreeting] = useState("");
+  const [isDay, setIsDay] = useState(true);
+  const sceneRef = useRef(null);
 
+  // Update IST time, greeting, and mode
   useEffect(() => {
-    // Animate the numbers fading in for a polished effect
-    gsap.from(numbersRef.current.children, {
-      opacity: 0,
-      stagger: 0.1,
-      duration: 1,
-      delay: 0.5,
-    });
-
-    // Real-time clock logic for India Standard Time (IST)
-    const setISTClock = () => {
-      const now = new Date();
-      // Get current time in UTC and add the IST offset (5 hours and 30 minutes)
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const istTime = new Date(utc + (330 * 60000)); // 330 minutes = 5.5 hours
-
-      const seconds = istTime.getSeconds();
-      const minutes = istTime.getMinutes();
-      const hours = istTime.getHours();
-
-      const secondDeg = (seconds / 60) * 360 + 90;
-      const minuteDeg = (minutes / 60) * 360 + 90;
-      const hourDeg = (hours / 12) * 360 + 90;
-
-      gsap.set(secondHandRef.current, { rotation: secondDeg });
-      gsap.set(minuteHandRef.current, { rotation: minuteDeg });
-      gsap.set(hourHandRef.current, { rotation: hourDeg });
+    const updateClock = () => {
+      const ist = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+      const hours = ist.getHours();
+      const minutes = ist.getMinutes();
+      const period = hours >= 12 ? "PM" : "AM";
+      const displayHour = hours % 12 === 0 ? 12 : hours % 12;
+      setTimeString(`${displayHour}:${minutes.toString().padStart(2, "0")} ${period}`);
+      
+      if (hours >= 5 && hours < 12) setGreeting("Good Morning");
+      else if (hours >= 12 && hours < 18) setGreeting("Good Afternoon");
+      else if (hours >= 18 && hours < 22) setGreeting("Good Evening");
+      else setGreeting("Good Night");
+      
+      setIsDay(hours >= 6 && hours < 18);
     };
+    updateClock();
+    const t = setInterval(updateClock, 1000);
+    return () => clearInterval(t);
+  }, []);
 
-    setISTClock();
-    const clockInterval = setInterval(setISTClock, 1000);
-
-    // Fade out logic remains the same
-    const fadeOutTimer = setTimeout(() => {
-      gsap.to('.glass-clock-wrapper', {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        onComplete: onLoaded,
+  // Preloader animations
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Animate the sun or moon icon
+      gsap.fromTo(".celestial-icon", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.5, ease: "elastic.out(1, 0.5)" });
+      
+      // Fade out the entire preloader
+      gsap.to(sceneRef.current, { 
+        opacity: 0, 
+        duration: 0.8, 
+        delay: 4,
+        onComplete: onLoaded
       });
-    }, 4000);
-
-    return () => {
-      clearInterval(clockInterval);
-      clearTimeout(fadeOutTimer);
-    };
-  }, [onLoaded]);
+    }, sceneRef);
+    return () => ctx.revert();
+  }, [isDay, onLoaded]);
 
   return (
-    <div className="glass-clock-wrapper">
-      <div className="glass-clock">
-        {/* Numbers for the clock face */}
-        <div className="clock-numbers" ref={numbersRef}>
-          {[...Array(12)].map((_, i) => (
-            <span key={i} className={`number number-${i + 1}`}>
-              {i + 1}
-            </span>
-          ))}
-        </div>
+    <div className={`scene-container ${isDay ? "day" : "night"}`} ref={sceneRef}>
+      {isDay ? <SunIcon /> : <FullMoonIcon />}
+      {/* The bird elements have been removed from here */}
 
-        {/* Clock Hands */}
-        <div className="hand hour-hand" ref={hourHandRef}></div>
-        <div className="hand minute-hand" ref={minuteHandRef}></div>
-        <div className="hand second-hand" ref={secondHandRef}></div>
-        <div className="hand-center"></div>
+      <div className="center-content">
+        <h1 className="greeting-text">{greeting}</h1>
+        <h2 className="time-text">{timeString}</h2>
+        <p className="portfolio-text">Welcome to My Portfolio</p>
       </div>
-      <h1 className="welcome-message">Welcome to my Portfolio</h1>
+
+      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+        <defs>
+          <radialGradient id="moon-gradient">
+            <stop offset="70%" stopColor="#f5f3ff" />
+            <stop offset="100%" stopColor="#e0e7ff" />
+          </radialGradient>
+        </defs>
+      </svg>
     </div>
   );
 };

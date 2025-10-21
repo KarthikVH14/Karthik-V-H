@@ -1,101 +1,77 @@
- .glass-clock-wrapper {
+ /* --- Scene Background --- */
+.scene-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--bg-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  transition: background 2s ease;
   z-index: 9999;
-  gap: 4rem;
 }
 
-.glass-clock {
-  width: 300px;
-  height: 300px;
-  position: relative;
-  
-  /* The Glassmorphism Effect */
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.scene-container.day {
+  background: var(--bg-color);
+}
+.scene-container.night {
+  background: var(--bg-color);
 }
 
-/* --- Clock Numbers --- */
-.clock-numbers {
+/* --- Celestial icons --- */
+.celestial-icon {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 40px;
+  right: 40px;
+  width: 80px;
+  height: 80px;
+  z-index: 10;
 }
 
-.number {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.sun {
+  fill: var(--primary-color);
+  stroke: var(--primary-color);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 15px var(--primary-color));
+}
+
+.moon {
+  filter: drop-shadow(0 0 20px #e0e7ff);
+}
+
+/* --- All bird-related CSS has been removed --- */
+
+
+/* --- Center glass card --- */
+.center-content {
   text-align: center;
-  font-family: 'Orbitron', sans-serif; /* Impressive, modern font */
-  font-size: 1.5rem;
+  color: var(--text-color);
+  backdrop-filter: blur(10px);
+  background: rgba(17, 34, 64, 0.4);
+  padding: 40px 60px;
+  border-radius: 20px;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(90, 151, 219, 0.2);
+}
+
+.greeting-text {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
   color: var(--primary-color);
-  opacity: 0.7;
-  padding-top: 10px; /* Adjust vertical alignment of numbers */
+  font-weight: 600;
 }
-
-/* Position each number in a circle using CSS transforms */
-.number-1 { transform: rotate(30deg) translateY(-120px) rotate(-30deg); }
-.number-2 { transform: rotate(60deg) translateY(-120px) rotate(-60deg); }
-.number-3 { transform: rotate(90deg) translateY(-120px) rotate(-90deg); }
-.number-4 { transform: rotate(120deg) translateY(-120px) rotate(-120deg); }
-.number-5 { transform: rotate(150deg) translateY(-120px) rotate(-150deg); }
-.number-6 { transform: rotate(180deg) translateY(-120px) rotate(-180deg); }
-.number-7 { transform: rotate(210deg) translateY(-120px) rotate(-210deg); }
-.number-8 { transform: rotate(240deg) translateY(-120px) rotate(-240deg); }
-.number-9 { transform: rotate(270deg) translateY(-120px) rotate(-270deg); }
-.number-10 { transform: rotate(300deg) translateY(-120px) rotate(-300deg); }
-.number-11 { transform: rotate(330deg) translateY(-120px) rotate(-330deg); }
-.number-12 { transform: rotate(360deg) translateY(-120px) rotate(-360deg); }
-
-
-/* --- Clock Hands --- */
-.hand {
-  position: absolute;
-  transform-origin: 50% 100%;
-  bottom: 50%;
-  left: 50%;
-  border-radius: 2px;
+.time-text {
+  font-size: 2rem;
+  margin: 5px 0;
+  color: var(--accent-color);
 }
-
-.hour-hand { width: 6px; height: 65px; background-color: var(--primary-color); }
-.minute-hand { width: 4px; height: 95px; background-color: var(--primary-color); }
-.second-hand { width: 2px; height: 115px; background-color: var(--accent-color); }
-
-.hand-center {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: var(--accent-color);
-  border-radius: 50%;
-  border: 2px solid var(--bg-color);
-}
-
-.welcome-message {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  color: var(--title-color);
-  font-weight: var(--font-medium);
-  text-align: center;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.5s forwards;
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
+.portfolio-text {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
