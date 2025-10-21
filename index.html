@@ -4,29 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Karthik VH | Java Full Stack Developer</title>
+    <!-- This is the crucial line that imports the new, impressive font for the clock -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- 
-      NETLIFY FORM HINT:
-      This is a hidden, basic HTML version of your contact form.
-      It has the same 'name' and the same input fields.
-      Netlify's bots will find this during the build process and activate
-      the form handling for the form named "contact".
-      It will not be visible on your live site.
-    -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
     </form>
     
-    <!-- Your React app will be rendered inside this div -->
     <div id="root"></div>
     
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-```
 
-
-    
